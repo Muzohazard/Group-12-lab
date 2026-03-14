@@ -51,18 +51,19 @@ input {
     padding: 10px;
 }
 
-button {
+select {
     border: none;
     outline: none;
-    padding: 16px 50px;
+    padding: 16px 20px;
     background: #601882;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
     border-radius: 40px;
+    margin-right: 10px;
 }
 
-ul li {
+ol li {
     list-style: none;
     font-size: 17px;
     padding: 12px 8px 12px 50px;
@@ -74,7 +75,7 @@ ul li {
     justify-content: space-between;
 }
 
-ul li::before {
+ol li::before {
     content: '';
     position: absolute;
     height: 28px;
@@ -87,16 +88,16 @@ ul li::before {
     left: 8px;
 }
 
-ul li.checked {
+ol li.checked {
     color: #555;
     text-decoration: line-through;
 }
 
-ul li.checked::before {
+ol li.checked::before {
     background-image: url(images/checked.png);
 }
 
-ul li span {
+ol li span {
     position: absolute;
     right: 0;
     top: 5px;
@@ -110,28 +111,29 @@ ul li span {
     cursor: pointer;
 }
 
-ul li span:hover {
+ol li span:hover {
     background: #edeef0;
 }
 
-/* New styles for Edit and Save buttons */
-ul li .edit-btn, 
-ul li .save-btn {
+
+ol li .edit-btn,
+ol li .save-btn {
     padding: 6px 15px;
     margin-right: 5px;
     font-size: 14px;
     border-radius: 20px;
-    background-color: #4CAF50; /* Edit button color */
+    background-color: #4CAF50;
+
     color: white;
     border: none;
     cursor: pointer;
 }
 
-ul li .save-btn {
-    background-color: #2196F3; /* Save button color */
+ol li .save-btn {
+    background-color: #2196F3;
 }
 
-ul li .edit-btn:hover, 
-ul li .save-btn:hover {
-    background-color: #45a049; /* Darker shade for hover effect */
+ol li .edit-btn:hover,
+ol li .save-btn:hover {
+    background-color: #45a049;
 }

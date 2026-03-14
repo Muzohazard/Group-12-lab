@@ -1,5 +1,8 @@
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
+const prioritySelect = document.getElementById("priority-select");
+
+const priorityOrder = { urgent: 1, normal: 2, casual: 3 };
 
 function addTask() {
     if (inputBox.value === '') {
@@ -7,6 +10,7 @@ function addTask() {
     } else {
         let li = document.createElement('li');
         li.innerHTML = inputBox.value;
+        li.setAttribute('data-priority', prioritySelect.value);
 
         let span = document.createElement("span");
         span.innerHTML = "\u00d7"; // delete symbol
@@ -18,11 +22,11 @@ function addTask() {
     saveData();
 }
 
-listContainer.addEventListener("click", function(e) {
+listContainer.addEventListener("click", function (e) {
     if (e.target.tagName === "LI") {
         e.target.classList.toggle("checked");
         saveData();
-    } 
+    }
     else if (e.target.tagName === "SPAN") {
         e.target.parentElement.remove();
         saveData();
@@ -30,11 +34,33 @@ listContainer.addEventListener("click", function(e) {
 }, false);
 
 function saveData() {
-    localStorage.setItem("data", listContainer.innerHTML);
+    let tasks = [];
+    let lis = listContainer.querySelectorAll('li');
+    lis.forEach(li => {
+        let text = li.childNodes[0].textContent;
+        let priority = li.getAttribute('data-priority');
+        let checked = li.classList.contains('checked');
+        tasks.push({ text, priority, checked });
+    });
+    localStorage.setItem("data", JSON.stringify(tasks));
 }
 
 function showTask() {
-    listContainer.innerHTML = localStorage.getItem("data");
+    let tasks = JSON.parse(localStorage.getItem("data")) || [];
+    tasks.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+    listContainer.innerHTML = '';
+    tasks.forEach(task => {
+        let li = document.createElement('li');
+        li.innerHTML = task.text;
+        li.setAttribute('data-priority', task.priority);
+        if (task.checked) {
+            li.classList.add('checked');
+        }
+        let span = document.createElement("span");
+        span.innerHTML = "\u00d7";
+        li.appendChild(span);
+        listContainer.appendChild(li);
+    });
 }
 
 showTask();
