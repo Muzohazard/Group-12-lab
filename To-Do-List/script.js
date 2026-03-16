@@ -13,6 +13,14 @@ function addTask() {
         li.innerHTML = inputBox.value;
         li.setAttribute('data-priority', prioritySelect.value);
 
+        // === NEW: Edit Button ===
+        let editBtn = document.createElement("span");
+        editBtn.innerHTML = "\u270E";        //  edit icon
+        editBtn.style.marginRight = "10px";
+        editBtn.style.cursor = "pointer";
+        li.appendChild(editBtn);
+        // ========================
+
         let span = document.createElement("span");
         span.innerHTML = "\u00d7"; // delete symbol
         li.appendChild(span);
@@ -30,8 +38,19 @@ listContainer.addEventListener("click", function (e) {
         saveData();
     }
     else if (e.target.tagName === "SPAN") {
-        e.target.parentElement.remove();
-        saveData();
+        if (e.target.innerHTML === "\u270E") {           // Edit button clicked
+            let taskText = e.target.parentElement.firstChild.textContent;
+            let newText = prompt("Edit your task:", taskText);
+            
+            if (newText !== null && newText.trim() !== "") {
+                e.target.parentElement.firstChild.textContent = newText;
+                saveData();
+            }
+        } 
+        else {
+            e.target.parentElement.remove();             // original delete code
+            saveData();
+        }
     }
 }, false);
 
