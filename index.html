@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewpoint" content="width=device-width, initial-scale=1">
+    <title>TO-DO List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="todo-app">
+            <h2>TO-DO List <img src="images/icon.png"></h2>
+            <div class="row">
+                <input type="text" id="search-box" placeholder="Search tasks..." onkeyup="searchTask()">
+                <input type="text" id="input-box" placeholder="Enter your Task.">
+                <input type="datetime-local" id="due-date">
+                <select id="priority-select">
+                    <option value="urgent">Urgent</option>
+                    <option value="normal" selected>Normal</option>
+                    <option value="casual">Casual</option>
+                </select>
+                <button onclick="addTask()">Add</button>
+            </div>
+            <ol id="list-container">
+                <!-- <li class="checked">Task 1</li>
+         <li>Task 2</li>
+         <li>Task 3</li>-->
+            </ol>
+            <div id="progress-container">
+    <p>Progress: <span id="progress-text">0%</span></p>
+    <progress id="progress-bar" value="0" max="100"></progress>
+</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
